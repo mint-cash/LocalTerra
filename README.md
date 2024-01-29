@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repo is a rollback of [terra-money/LocalTerra](https://github.com/terra-money/LocalTerra) to bring back support for [Terra Classic](https://github.com/terra-money/classic-core). It's the only reliable solution for developing on classic, as most faucets are currently inactive.
+
 <p>&nbsp;</p>
 <p align="center">
 <img src="https://raw.githubusercontent.com/terra-money/LocalTerra/master/img/localterra_logo_with_name.svg" width=500>
