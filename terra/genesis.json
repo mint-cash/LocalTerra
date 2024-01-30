@@ -4,14 +4,14 @@
   "initial_height": "1",
   "consensus_params": {
     "block": {
-      "max_bytes": "22020096",
-      "max_gas": "-1",
+      "max_bytes": "5000000",
+      "max_gas": "1000000000",
       "time_iota_ms": "1000"
     },
     "evidence": {
-      "max_age_num_blocks": "100000",
       "max_age_duration": "172800000000000",
-      "max_bytes": "1048576"
+      "max_age_num_blocks": "100000",
+      "max_bytes": "50000"
     },
     "validator": {
       "pub_key_types": [
@@ -25,7 +25,7 @@
     "auth": {
       "params": {
         "max_memo_characters": "256",
-        "tx_sig_limit": "7",
+        "tx_sig_limit": "100",
         "tx_size_cost_per_byte": "10",
         "sig_verify_cost_ed25519": "590",
         "sig_verify_cost_secp256k1": "1000"
@@ -574,21 +574,22 @@
     },
     "market": {
       "params": {
-        "base_pool": "7000000000000.000000000000000000",
-        "pool_recovery_period": "200",
-        "min_stability_spread": "0.005000000000000000"
-      }
+        "base_pool": "32500000000000.000000000000000000",
+        "min_stability_spread": "0.005000000000000000",
+        "pool_recovery_period": "49"
+      },
+      "terra_pool_delta": "0.000000000000000000"
     },
     "mint": {
       "minter": {
-        "inflation": "0.130000000000000000",
+        "inflation": "0.000000000000000000",
         "annual_provisions": "0.000000000000000000"
       },
       "params": {
         "mint_denom": "uluna",
         "inflation_rate_change": "0.000000000000000000",
-        "inflation_max": "0.200000000000000000",
-        "inflation_min": "0.070000000000000000",
+        "inflation_max": "0.000000000000000000",
+        "inflation_min": "0.000000000000000000",
         "goal_bonded": "0.670000000000000000",
         "blocks_per_year": "6311520"
       }
@@ -597,8 +598,8 @@
       "params": {
         "vote_period": "5",
         "vote_threshold": "0.500000000000000000",
-        "reward_band": "0.020000000000000000",
-        "reward_distribution_window": "5256000",
+        "reward_band": "0.120000000000000000",
+        "reward_distribution_window": "15768000",
         "whitelist": [
           {
             "name": "ukrw",
@@ -618,7 +619,7 @@
           }
         ],
         "slash_fraction": "0.000100000000000000",
-        "slash_window": "100800",
+        "slash_window": "432000",
         "min_valid_per_window": "0.050000000000000000"
       },
       "feeder_delegations": [],
@@ -631,19 +632,19 @@
     "params": null,
     "slashing": {
       "params": {
-        "signed_blocks_window": "100",
-        "min_signed_per_window": "0.500000000000000000",
+        "signed_blocks_window": "10000",
+        "min_signed_per_window": "0.050000000000000000",
         "downtime_jail_duration": "600s",
         "slash_fraction_double_sign": "0.050000000000000000",
-        "slash_fraction_downtime": "0.010000000000000000"
+        "slash_fraction_downtime": "0.000100000000000000"
       },
       "signing_infos": [],
       "missed_blocks": []
     },
     "staking": {
       "params": {
-        "unbonding_time": "600s",
-        "max_validators": 100,
+        "unbonding_time": "1814400s",
+        "max_validators": 130,
         "max_entries": 7,
         "historical_entries": 10000,
         "bond_denom": "uluna"
@@ -667,13 +668,13 @@
     "treasury": {
       "params": {
         "tax_policy": {
-          "rate_min": "0.000000000000000000",
-          "rate_max": "0.000000000000000000",
+          "rate_max": "0.010000000000000000",
+          "rate_min": "0.001000000000000000",
           "cap": {
             "denom": "usdr",
-            "amount": "0"
+            "amount": "1000000"
           },
-          "change_rate_max": "0.000000000000000000"
+          "change_rate_max": "0.000250000000000000"
         },
         "reward_policy": {
           "rate_min": "0.000000000000000000",
@@ -688,10 +689,10 @@
         "mining_increment": "1.070000000000000000",
         "window_short": "4",
         "window_long": "52",
-        "window_probation": "12"
+        "window_probation": "18"
       },
-      "tax_rate": "0.000000000000000000",
-      "reward_weight": "0.050000000000000000",
+      "tax_rate": "0.004691811080725897",
+      "reward_weight": "1.000000000000000000",
       "tax_caps": [],
       "tax_proceeds": [],
       "epoch_initial_issuance": [],
