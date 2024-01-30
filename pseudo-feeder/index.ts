@@ -7,7 +7,7 @@ import {
 } from "@terra-money/terra.js";
 import { parse } from "toml";
 import * as fs from "fs";
-import * as ms from "ms"
+import ms from "ms"
 
 const {
   MAINNET_LCD_URL = "https://lcd.terra.dev",
