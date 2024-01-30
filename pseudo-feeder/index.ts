@@ -17,7 +17,7 @@ const {
   MNEMONIC = "satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn",
 } = process.env;
 
-const config = parse(fs.readFileSync("./config.toml").toString());
+const config = parse(fs.readFileSync("./config.toml").toString()) as { consensus: Record<string, string> };
 
 /* unused
 const timeout_propose = toMs(config.consensus.timeout_propose); // 3s by default
