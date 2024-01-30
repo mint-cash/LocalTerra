@@ -1,5 +1,6 @@
 {
-  "mnemonics": [{
+  "mnemonics": [
+    {
       "name": "validator",
       "address": "terra1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8",
       "pubkey": "terrapub1addwnpepqflqjs2z2l52fku85zh65cxt8ctm4yn4nk5l9xyv80jq5hvszddpck20sd0",
