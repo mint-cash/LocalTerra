@@ -647,7 +647,8 @@
         "max_validators": 130,
         "max_entries": 7,
         "historical_entries": 10000,
-        "bond_denom": "uluna"
+        "bond_denom": "uluna",
+        "min_commission_rate": "0.000000000000000000"
       },
       "last_total_power": "0",
       "last_validator_powers": [],
@@ -685,6 +686,8 @@
           },
           "change_rate_max": "0.000000000000000000"
         },
+        "min_initial_deposit_ratio": "0.000000000000000000",
+        "burn_tax_split": "0.300000000000000000",
         "seigniorage_burden_target": "0.670000000000000000",
         "mining_increment": "1.070000000000000000",
         "window_short": "4",
@@ -700,16 +703,6 @@
     },
     "upgrade": {},
     "vesting": null,
-    "wasm": {
-      "params": {
-        "max_contract_size": "614400",
-        "max_contract_gas": "20000000",
-        "max_contract_msg_size": "4096"
-      },
-      "last_code_id": "0",
-      "last_instance_id": "0",
-      "codes": [],
-      "contracts": []
-    }
+    "wasm": null
   }
 }
