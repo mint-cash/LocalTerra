@@ -58,8 +58,6 @@ Your environment now contains:
 - [FCD](http://www.github.com/terra-money/fcd) running on http://localhost:3060
 - An oracle feeder feeding live prices from mainnet, trailing by one vote period
 
-
-
 Stop LocalTerra:
 
 ```sh
@@ -97,6 +95,7 @@ $ terrad status
 This command automatically works because `terrad` connects to `localhost:26657` by default.
 
 The following command is the explicit form:
+
 ```sh
 $ terrad status --node=tcp://localhost:26657
 ```
@@ -121,11 +120,11 @@ terra = LCDClient("localterra", "http://localhost:1317")
 Connect to the chain through LocalTerra's LCD server:
 
 ```ts
-import { LCDClient } from "@terra-money/terra.js";
+import { LCDClient } from '@terra-money/terra.js';
 
 const terra = new LCDClient({
-  URL: "http://localhost:1317",
-  chainID: "localterra",
+  URL: 'http://localhost:1317',
+  chainID: 'localterra',
 });
 ```
 

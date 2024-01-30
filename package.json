@@ -1,0 +1,16 @@
+{
+  "name": "@mint-cash/localterra",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "https://github.com/mint-cash/LocalTerra",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "workspaces": [
+    "pseudo-feeder"
+  ],
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "prettier": "^3.2.4"
+  }
+}
