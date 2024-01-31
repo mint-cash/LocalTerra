@@ -16,7 +16,7 @@ FROM --platform=${BUILDPLATFORM} ${BASE_IMAGE} as base
 FROM base as builder-stage-1
 
 # Define environment variables for the build process
-ARG BUILDPLATFORM
+ARG BUILDPLATFORM=linux/amd64
 ARG GOOS=linux
 ARG GOARCH=amd64
 
