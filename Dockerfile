@@ -37,7 +37,7 @@ RUN set -eux &&\
 WORKDIR ${GOPATH}/src/mimalloc
 RUN set -eux &&\
     git clone --depth 1 --branch v2.1.2 \
-    https://github.com/microsoft/mimalloc . &&\
+        https://github.com/microsoft/mimalloc . &&\
     mkdir -p build &&\
     cd build &&\
     cmake .. &&\
@@ -68,12 +68,12 @@ RUN set -eux &&\
     WASMVM_DOWNLOADS="https://github.com/classic-terra/wasmvm/releases/download/${WASMVM_VERSION}"; \
     wget ${WASMVM_DOWNLOADS}/checksums.txt -O /tmp/checksums.txt; \
     if [ ${BUILDPLATFORM} = "linux/amd64" ]; then \
-    WASMVM_URL="${WASMVM_DOWNLOADS}/libwasmvm_muslc.x86_64.a"; \
+        WASMVM_URL="${WASMVM_DOWNLOADS}/libwasmvm_muslc.x86_64.a"; \
     elif [ ${BUILDPLATFORM} = "linux/arm64" ]; then \
-    WASMVM_URL="${WASMVM_DOWNLOADS}/libwasmvm_muslc.aarch64.a"; \
+        WASMVM_URL="${WASMVM_DOWNLOADS}/libwasmvm_muslc.aarch64.a"; \
     else \
-    echo "Unsupported Build Platfrom ${BUILDPLATFORM}"; \
-    exit 1; \
+        echo "Unsupported Build Platfrom ${BUILDPLATFORM}"; \
+        exit 1; \
     fi; \
     wget ${WASMVM_URL} -O /lib/libwasmvm_muslc.a; \
     CHECKSUM=`sha256sum /lib/libwasmvm_muslc.a | cut -d" " -f1`; \
@@ -102,19 +102,19 @@ WORKDIR /code
 RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/root/go/pkg/mod \
     go install \
-    -mod=readonly \
-    -tags "netgo,muslc" \
-    -ldflags " \
-    -w -s -linkmode=external -extldflags \
-    '-L/go/src/mimalloc/build -lmimalloc -Wl,-z,muldefs -static' \
-    -X github.com/cosmos/cosmos-sdk/version.Name='terra' \
-    -X github.com/cosmos/cosmos-sdk/version.AppName='terrad' \
-    -X github.com/cosmos/cosmos-sdk/version.Version=${GIT_VERSION} \
-    -X github.com/cosmos/cosmos-sdk/version.Commit=${GIT_COMMIT} \
-    -X github.com/cosmos/cosmos-sdk/version.BuildTags='netgo,muslc' \
-    " \
-    -trimpath \
-    ./...
+        -mod=readonly \
+        -tags "netgo,muslc" \
+        -ldflags " \
+            -w -s -linkmode=external -extldflags \
+            '-L/go/src/mimalloc/build -lmimalloc -Wl,-z,muldefs -static' \
+            -X github.com/cosmos/cosmos-sdk/version.Name='terra' \
+            -X github.com/cosmos/cosmos-sdk/version.AppName='terrad' \
+            -X github.com/cosmos/cosmos-sdk/version.Version=${GIT_VERSION} \
+            -X github.com/cosmos/cosmos-sdk/version.Commit=${GIT_COMMIT} \
+            -X github.com/cosmos/cosmos-sdk/version.BuildTags='netgo,muslc' \
+        " \
+        -trimpath \
+        ./...
 
 ################################################################################
 # Final stage to build the terra-core image with Nginx setup
@@ -144,19 +144,16 @@ RUN set -eux &&\
     mkdir -p /app/data && \
     chown -R terra:terra /app && \
     terrad init localterra \
-    --home /app \
-    --chain-id localterra && \
+        --home /app \
+        --chain-id localterra && \
     echo '{"height": "0","round": 0,"step": 0}' > /app/data/priv_validator_state.json
 
 # Copy the Nginx configuration, entrypoint script, and Terra configuration files
 COPY --chmod=644 nginx.conf /etc/nginx/nginx.conf
 COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY ./terra/priv_validator_key.json \
-    ./terra/genesis.json \
-    ./terra/app.toml \
-    ./terra/config.toml \
-    ./terra/client.toml \
-    /app/config/
+     ./terra/genesis.json \
+     /app/config/
 
 # Set the entry point
 ENTRYPOINT [ "entrypoint.sh" ]
