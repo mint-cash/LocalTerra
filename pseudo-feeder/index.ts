@@ -2,34 +2,20 @@ import {
   LCDClient,
   MnemonicKey,
   MsgAggregateExchangeRateVote,
-} from '@terra-money/terra.js';
+} from '@terraclassic-community/terra.js';
 import { randomBytes } from 'crypto';
-import * as fs from 'fs';
 import ms from 'ms';
 import * as net from 'net';
-import { parse } from 'toml';
 
 const {
-  MAINNET_LCD_URL = 'https://lcd.terra.dev',
+  MAINNET_LCD_URL = 'https://terra-classic-lcd.publicnode.com',
   MAINNET_CHAIN_ID = 'columbus-5',
   TESTNET_LCD_URL = 'http://localhost:1317',
   TESTNET_CHAIN_ID = 'localterra',
   MNEMONIC = 'satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn',
 } = process.env;
 
-const config = parse(fs.readFileSync('./config.toml').toString()) as {
-  consensus: Record<string, string>;
-};
-
-/* unused
-const timeout_propose = toMs(config.consensus.timeout_propose); // 3s by default
-const timeout_propose_delta = toMs(config.consensus.timeout_propose_delta);  // 500ms by default
-const timeout_prevote = toMs(config.consensus.timeout_prevote); // 1s by default
-const timeout_prevote_delta = toMs(config.consensus.timeout_prevote_delta); // 500ms by default
-const timeout_prevcommit = toMs(config.consensus.timeout_precommit); // 1s by default
-const timeout_precommit_delta = toMs(config.consensus.timeout_precommit_delta); // 500ms by default
-*/
-const timeoutCommit = ms(config.consensus.timeout_commit); // 5s by default
+const timeoutCommit = ms('5s'); // 5s by default
 
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -93,6 +79,7 @@ async function waitForFirstBlock(client: LCDClient) {
 const mainnetClient = new LCDClient({
   URL: MAINNET_LCD_URL,
   chainID: MAINNET_CHAIN_ID,
+  isClassic: true,
 });
 
 const testnetClient = new LCDClient({
@@ -100,11 +87,28 @@ const testnetClient = new LCDClient({
   chainID: TESTNET_CHAIN_ID,
   gasPrices: '0.01133uluna',
   gasAdjustment: 1.4,
+  isClassic: true,
 });
 
 const mk = new MnemonicKey({
   mnemonic: MNEMONIC,
 });
+
+const defaultOracleParams = {
+  vote_period: '5',
+  vote_threshold: '0.500000000000000000',
+  reward_band: '0.120000000000000000',
+  reward_distribution_window: '15768000',
+  whitelist: [
+    { name: 'ukrw', tobin_tax: '0.002500000000000000' },
+    { name: 'usdr', tobin_tax: '0.002500000000000000' },
+    { name: 'uusd', tobin_tax: '0.002500000000000000' },
+    { name: 'ueur', tobin_tax: '0.002500000000000000' },
+  ],
+  slash_fraction: '0.000100000000000000',
+  slash_window: '432000',
+  min_valid_per_window: '0.050000000000000000',
+};
 
 const wallet = testnetClient.wallet(mk);
 
@@ -115,14 +119,24 @@ async function loop() {
   // to get initial rates and params
   let [rates, oracleParams] = await Promise.all([
     mainnetClient.oracle.exchangeRates(),
-    testnetClient.oracle.parameters(),
+    testnetClient.oracle.parameters().catch((e) => {
+      console.log(
+        `failed to get oracle params (using default in genesis): ${e}`,
+      );
+      return defaultOracleParams;
+    }),
   ]);
 
   setInterval(async () => {
     try {
       [rates, oracleParams] = await Promise.all([
         mainnetClient.oracle.exchangeRates(),
-        testnetClient.oracle.parameters(),
+        testnetClient.oracle.parameters().catch((e) => {
+          console.log(
+            `failed to get oracle params (using default in genesis): ${e}`,
+          );
+          return defaultOracleParams;
+        }),
       ]);
     } catch (e) {}
   }, 10000); // 5s -> 10s: to avoid rate limit
@@ -130,10 +144,14 @@ async function loop() {
   while (true) {
     const latestBlock = await testnetClient.tendermint.blockInfo();
 
-    const oracleVotePeriod = oracleParams.vote_period;
+    const oracleVotePeriod =
+      typeof oracleParams.vote_period === 'string'
+        ? parseFloat(oracleParams.vote_period)
+        : oracleParams.vote_period;
     const currentBlockHeight = parseInt(latestBlock.block.header.height, 10);
     const currentVotePeriod = Math.floor(currentBlockHeight / oracleVotePeriod);
     const indexInVotePeriod = currentBlockHeight % oracleVotePeriod;
+
     if (
       (lastSuccessVotePeriod && lastSuccessVotePeriod === currentVotePeriod) ||
       indexInVotePeriod >= oracleVotePeriod - 1
@@ -168,7 +186,7 @@ async function loop() {
       lastSuccessVotePeriod = currentVotePeriod;
       lastSuccessVoteMsg = voteMsg;
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
       delay(timeoutCommit);
     }
     await delay(timeoutCommit * (oracleVotePeriod - 1)); // (period-1) because of broadcast
