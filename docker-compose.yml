@@ -20,7 +20,7 @@ services:
       - '26657:26657'
   oracle:
     build:
-      context: ./pseudo-feeder
+      context: ./oracle-feeder
       dockerfile: Dockerfile
     pull_policy: always
     depends_on:
