@@ -1,4 +1,5 @@
 import {
+  BlockInfo,
   LCDClient,
   MnemonicKey,
   MsgAggregateExchangeRateVote,
@@ -64,8 +65,8 @@ async function waitForFirstBlock(client: LCDClient) {
 
         return false;
       })
-      .catch(async (err) => {
-        console.error(err);
+      .catch(async () => {
+        console.error(`failed to get latest block`);
         await delay(timeoutCommit);
         return false;
       });
@@ -120,7 +121,7 @@ async function loop() {
   let [rates, oracleParams] = await Promise.all([
     mainnetClient.oracle.exchangeRates(),
     testnetClient.oracle.parameters().catch((e) => {
-      console.log(
+      console.error(
         `failed to get oracle params (using default in genesis): ${e}`,
       );
       return defaultOracleParams;
@@ -132,7 +133,7 @@ async function loop() {
       [rates, oracleParams] = await Promise.all([
         mainnetClient.oracle.exchangeRates(),
         testnetClient.oracle.parameters().catch((e) => {
-          console.log(
+          console.error(
             `failed to get oracle params (using default in genesis): ${e}`,
           );
           return defaultOracleParams;
@@ -142,7 +143,14 @@ async function loop() {
   }, 10000); // 5s -> 10s: to avoid rate limit
 
   while (true) {
-    const latestBlock = await testnetClient.tendermint.blockInfo();
+    let latestBlock: BlockInfo;
+
+    try {
+      latestBlock = await testnetClient.tendermint.blockInfo();
+    } catch (e) {
+      console.error(`failed to get latest block`);
+      continue;
+    }
 
     const oracleVotePeriod =
       typeof oracleParams.vote_period === 'string'
