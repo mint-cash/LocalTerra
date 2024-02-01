@@ -1,5 +1,5 @@
 {
-  "name": "@mint-cash/localterra-pseudo-feeder",
+  "name": "@mint-cash/localterra-oracle-feeder",
   "version": "0.5.5",
   "description": "Oracle feeder that votes price as same as current exchange rate on mainnet",
   "scripts": {
