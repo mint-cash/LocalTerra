@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     platform: linux/amd64
-    image: golang:1.20-alpine3.18
     hostname: terrad
     pull_policy: always
     volumes:
