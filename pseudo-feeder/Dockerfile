@@ -1,8 +1,8 @@
-FROM node:lts
+FROM node:21
 
 WORKDIR /app
 
 COPY . .
-RUN npm ci
+RUN yarn
 
-ENTRYPOINT ["npm", "run"]
+ENTRYPOINT ["yarn", "start"]
