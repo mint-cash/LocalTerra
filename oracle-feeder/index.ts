@@ -5,8 +5,11 @@ import {
   MsgAggregateExchangeRateVote,
 } from '@terraclassic-community/terra.js';
 import { randomBytes } from 'crypto';
+import dotenv from 'dotenv';
 import ms from 'ms';
 import * as net from 'net';
+
+dotenv.config({ path: __dirname });
 
 const {
   MAINNET_LCD_URL = 'https://terra-classic-lcd.publicnode.com',
@@ -202,6 +205,7 @@ async function loop() {
 }
 
 (async () => {
+  console.log(`wallet: ${wallet.key.accAddress}`);
   await waitForFirstBlock(testnetClient);
 
   while (true) {
