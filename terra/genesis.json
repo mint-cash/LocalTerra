@@ -689,9 +689,98 @@
         "window_long": "52",
         "window_probation": "18"
       },
-      "tax_rate": "0.004691811080725897",
+      "tax_rate": "0.005000000000000000",
       "reward_weight": "1.000000000000000000",
-      "tax_caps": [],
+      "tax_caps": [
+        {
+          "denom": "uaud",
+          "tax_cap": "122266668628217863"
+        },
+        {
+          "denom": "ucad",
+          "tax_cap": "107376790797650865"
+        },
+        {
+          "denom": "uchf",
+          "tax_cap": "70256754066424773"
+        },
+        {
+          "denom": "ucny",
+          "tax_cap": "570350485129174966"
+        },
+        {
+          "denom": "udkk",
+          "tax_cap": "551639057517923730"
+        },
+        {
+          "denom": "ueur",
+          "tax_cap": "74009352384898096"
+        },
+        {
+          "denom": "ugbp",
+          "tax_cap": "63098830005377530"
+        },
+        {
+          "denom": "uhkd",
+          "tax_cap": "619856578788437431"
+        },
+        {
+          "denom": "uidr",
+          "tax_cap": "1237101326259947001271"
+        },
+        {
+          "denom": "uinr",
+          "tax_cap": "6583894393056535261"
+        },
+        {
+          "denom": "ujpy",
+          "tax_cap": "11936483542622986122"
+        },
+        {
+          "denom": "ukrw",
+          "tax_cap": "105714431999999929839"
+        },
+        {
+          "denom": "umnt",
+          "tax_cap": "271425238850206298549"
+        },
+        {
+          "denom": "umyr",
+          "tax_cap": "379454016882357942"
+        },
+        {
+          "denom": "unok",
+          "tax_cap": "839073928539604778"
+        },
+        {
+          "denom": "uphp",
+          "tax_cap": "4452691327268427537"
+        },
+        {
+          "denom": "usdr",
+          "tax_cap": "1000000"
+        },
+        {
+          "denom": "usek",
+          "tax_cap": "837242472868704442"
+        },
+        {
+          "denom": "usgd",
+          "tax_cap": "106948647916597065"
+        },
+        {
+          "denom": "uthb",
+          "tax_cap": "2868561099698330471"
+        },
+        {
+          "denom": "utwd",
+          "tax_cap": "2535779451739817748"
+        },
+        {
+          "denom": "uusd",
+          "tax_cap": "79285824000000341"
+        }
+      ],
       "tax_proceeds": [],
       "epoch_initial_issuance": [],
       "epoch_states": []
