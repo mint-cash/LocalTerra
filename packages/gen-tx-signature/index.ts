@@ -9,6 +9,7 @@ import {
 const terra = new LCDClient({
   URL: 'https://terra-classic-lcd.publicnode.com',
   chainID: 'columbus-5',
+  isClassic: true,
 });
 
 const mk = new MnemonicKey({
@@ -44,7 +45,7 @@ const msgCreateValidator = MsgCreateValidator.fromData({
     amount: '1000000',
   },
 });
-const fee = new Fee(200000, '120000uluna');
+const fee = new Fee(200000, []);
 
 const main = async () => {
   console.log({
@@ -64,7 +65,10 @@ const main = async () => {
   });
 
   console.log(tx);
-  // signatures: ["QiMC32NUGHYhSbK5vKqnoPXbInVUDepkFUia4wnGzbhTLTWn7dPpSE2yjEfbhY8rGaCGpUXfdzxaxXPDTbSlaQ=="]
+  // signatures: ["F9dLBC2XXvaiKJYioNpNOXe3zDdoO4rlv9LIR6aZvTRFxgMiNVin5UIfY45RXuF0NaMy0nW6xQVq/J3W1+lcfg=="]
+
+  const serializedTx = tx.toData();
+  console.log('Serialized Transaction:', JSON.stringify(serializedTx, null, 2));
 };
 
 main().catch((err) => {
