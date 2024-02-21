@@ -6,7 +6,6 @@
     "start": "ts-node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@terraclassic-community/terra.js": "^3.1.10",
