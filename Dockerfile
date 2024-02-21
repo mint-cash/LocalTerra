@@ -44,9 +44,9 @@ RUN set -eux &&\
     make -j$(nproc) &&\
     make install
 
-# Clone the desired repository
+# Clone the implementation repo
 WORKDIR /code
-RUN git clone --branch v2.3.3 --depth 1 https://github.com/classic-terra/core.git .
+RUN git clone --branch main --depth 1 https://github.com/mint-cash/terra-classic-core .
 
 # Set the GIT_COMMIT and GIT_VERSION using Git commands
 WORKDIR /code
