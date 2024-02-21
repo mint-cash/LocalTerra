@@ -7,10 +7,11 @@
     "format": "prettier --write ."
   },
   "workspaces": [
-    "oracle-feeder"
+    "packages/*"
   ],
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "prettier": "^3.2.4"
-  }
+  },
+  "packageManager": "yarn@4.1.0"
 }

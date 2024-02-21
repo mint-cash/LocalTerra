@@ -21,7 +21,7 @@ services:
       - '26657:26657'
   oracle:
     build:
-      context: ./oracle-feeder
+      context: ./packages/oracle-feeder
       dockerfile: Dockerfile
     depends_on:
       - terrad
