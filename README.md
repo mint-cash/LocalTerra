@@ -1,6 +1,13 @@
 > [!IMPORTANT]
 > This repo is a rollback of [terra-money/LocalTerra](https://github.com/terra-money/LocalTerra) to bring back support for [Terra Classic](https://github.com/terra-money/classic-core). It's the only reliable solution for developing on classic, as most faucets are currently inactive.
 
+> [!TIP]
+> We are using the chainID `columbus-5` instead of `localterra` to correctly simulate the `isClassic` behavior across multiple existing clients, such as Keplr, Station, etc.
+> Examples:
+>
+> - https://github.com/chainapsis/keplr-wallet/commit/568a643f2a653ff97d1c2d6ae914bb3f54e413ed
+> - https://github.com/terra-money/station-extension/commit/e5672a88febf98c38e0574b490cfff74baef6087#diff-f9b6f47dd0b3866f3e011e6f787cb035f6abb436bd32f4528e59cac2caf56c44R145-R149
+
 <p>&nbsp;</p>
 <p align="center">
 <img src="https://raw.githubusercontent.com/terra-money/LocalTerra/master/img/localterra_logo_with_name.svg" width=500>

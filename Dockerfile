@@ -44,9 +44,9 @@ RUN set -eux &&\
     make -j$(nproc) &&\
     make install
 
-# Clone the desired repository
+# Clone the implementation repo
 WORKDIR /code
-RUN git clone --branch v2.3.3 --depth 1 https://github.com/classic-terra/core.git .
+RUN git clone --branch main --depth 1 https://github.com/mint-cash/terra-classic-core .
 
 # Set the GIT_COMMIT and GIT_VERSION using Git commands
 WORKDIR /code
@@ -138,14 +138,14 @@ RUN mkdir -p /var/lib/nginx/logs && \
 # Copy the built binary from the builder stage
 COPY --from=builder-stage-2 /go/bin/terrad /usr/local/bin/terrad
 
-# Setup for localterra
+# Setup localterra (columbus-5)
 RUN set -eux &&\
     mkdir -p /app/config && \
     mkdir -p /app/data && \
     chown -R terra:terra /app && \
-    terrad init localterra \
+    terrad init columbus-5 \
     --home /app \
-    --chain-id localterra && \
+    --chain-id columbus-5 && \
     echo '{"height": "0","round": 0,"step": 0}' > /app/data/priv_validator_state.json
 
 # Copy the Nginx configuration, entrypoint script, and Terra configuration files
@@ -174,7 +174,7 @@ EXPOSE 26657
 CMD terrad start \
     --home /app \
     --minimum-gas-prices "0.01133uluna,0.15uusd,0.104938usdr,169.77ukrw,428.571umnt,0.125ueur,0.98ucny,16.37ujpy,0.11ugbp,10.88uinr,0.19ucad,0.14uchf,0.19uaud,0.2usgd,4.62uthb,1.25usek" \
-    --moniker localterra \
+    --moniker columbus-5 \
     --p2p.upnp true \
     --rpc.laddr tcp://0.0.0.0:26657 \
     --api.enable true \

@@ -1,6 +1,6 @@
 {
   "genesis_time": "2021-05-26T10:02:06.396784Z",
-  "chain_id": "localterra",
+  "chain_id": "columbus-5",
   "initial_height": "1",
   "consensus_params": {
     "block": {
@@ -460,7 +460,7 @@
               {
                 "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
                 "description": {
-                  "moniker": "localterra",
+                  "moniker": "columbus-5",
                   "identity": "",
                   "website": "",
                   "security_contact": "",
@@ -484,7 +484,7 @@
                 }
               }
             ],
-            "memo": "62cd922a9d9349e790247dadd1e32947450502fb@10.10.20.74:26656",
+            "memo": "cd38dbd287fed9d001a8cc7cd8f5b53821c764b3@172.17.0.2:26656",
             "timeout_height": "0",
             "extension_options": [],
             "non_critical_extension_options": []
@@ -509,10 +509,11 @@
               "gas_limit": "200000",
               "payer": "",
               "granter": ""
-            }
+            },
+            "tip": null
           },
           "signatures": [
-            "Xb9hjzkSJus9X6scrJO2RbC2jWie7oMst6bWQuvDBrwFeTXTM7YZD4B6YyOaHep9VRQHONDl3iZqeM1oYw8PQA=="
+            "iGOOcmLXff1kYhATZzWgwaCrVyD/bdzAvkj3jS/wpvM7UAl3EVDltAXMFMZ8N+qibtuyxAQ5ebPa1NW2XpbNeA=="
           ]
         }
       ]
@@ -554,7 +555,10 @@
       "connection_genesis": {
         "connections": [],
         "client_connection_paths": [],
-        "next_connection_sequence": "0"
+        "next_connection_sequence": "0",
+        "params": {
+          "max_expected_time_per_block": "30000000000"
+        }
       },
       "channel_genesis": {
         "channels": [],
@@ -566,6 +570,37 @@
         "ack_sequences": [],
         "next_channel_sequence": "0"
       }
+    },
+    "interchainaccounts": {
+      "controller_genesis_state": {
+        "active_channels": [],
+        "interchain_accounts": [],
+        "params": {
+          "controller_enabled": true
+        },
+        "ports": []
+      },
+      "host_genesis_state": {
+        "active_channels": [],
+        "interchain_accounts": [],
+        "params": {
+          "allow_messages": [
+            "/terra.*",
+            "/ibc.*",
+            "/cosmos.[a-rt-z]*",
+            "/cosmos.s[a-su-z]*"
+          ],
+          "host_enabled": true
+        },
+        "port": "icahost"
+      }
+    },
+    "feeibc": {
+      "identified_fees": [],
+      "fee_enabled_channels": [],
+      "registered_payees": [],
+      "registered_counterparty_payees": [],
+      "forward_relayers": []
     },
     "market": {
       "params": {
