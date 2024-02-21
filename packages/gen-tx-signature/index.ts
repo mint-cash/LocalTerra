@@ -64,6 +64,7 @@ const main = async () => {
   });
 
   console.log(tx);
+  // signatures: ["QiMC32NUGHYhSbK5vKqnoPXbInVUDepkFUia4wnGzbhTLTWn7dPpSE2yjEfbhY8rGaCGpUXfdzxaxXPDTbSlaQ=="]
 };
 
 main().catch((err) => {
