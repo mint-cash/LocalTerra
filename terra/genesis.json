@@ -1,6 +1,6 @@
 {
   "genesis_time": "2021-05-26T10:02:06.396784Z",
-  "chain_id": "localterra",
+  "chain_id": "columbus-5",
   "initial_height": "1",
   "consensus_params": {
     "block": {
@@ -460,7 +460,7 @@
               {
                 "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
                 "description": {
-                  "moniker": "localterra",
+                  "moniker": "columbus-5",
                   "identity": "",
                   "website": "",
                   "security_contact": "",

@@ -15,7 +15,7 @@ const {
   MAINNET_LCD_URL = 'https://terra-classic-lcd.publicnode.com',
   MAINNET_CHAIN_ID = 'columbus-5',
   TESTNET_LCD_URL = 'http://localhost:1317',
-  TESTNET_CHAIN_ID = 'localterra',
+  TESTNET_CHAIN_ID = 'columbus-5',
   MNEMONIC = 'satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn',
 } = process.env;
 
