@@ -255,17 +255,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mint-cash/localterra-gen-tx-signature@workspace:packages/gen-tx-signature":
-  version: 0.0.0-use.local
-  resolution: "@mint-cash/localterra-gen-tx-signature@workspace:packages/gen-tx-signature"
-  dependencies:
-    "@terraclassic-community/terra.js": "npm:^3.1.10"
-    "@types/node": "npm:^20.11.10"
-    ts-node: "npm:^10.9.2"
-    typescript: "npm:^5.3.3"
-  languageName: unknown
-  linkType: soft
-
 "@mint-cash/localterra-oracle-feeder@workspace:packages/oracle-feeder":
   version: 0.0.0-use.local
   resolution: "@mint-cash/localterra-oracle-feeder@workspace:packages/oracle-feeder"
